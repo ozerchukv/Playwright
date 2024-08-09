@@ -11,7 +11,7 @@ def run(playwright: Playwright) -> None:
     page.pause()
     page.get_by_placeholder("Password").fill("Ivan2910")
     page.get_by_role("button", name="Sign in").click()
-    print("Your first test is successful")
+    print("Your first test with Playwright is successful")
 
     # ---------------------
     context.close()
