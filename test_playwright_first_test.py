@@ -2,16 +2,20 @@ import re
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 
-def run(playwright: Playwright) -> None:
+def test_run(playwright: Playwright) -> None:
+    url = "https://uat.maxsipapps.com/"
+    email = "mir@mail.com"
+    password = "Ivan2910"
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
-    page.goto("https://uat.maxsipapps.com/")
-    page.get_by_placeholder("Email Address").fill("mir@mail.com")
-    page.pause()
-    page.get_by_placeholder("Password").fill("Ivan2910")
+
+    page.goto(url)
+    page.get_by_placeholder("Email Address").fill(email)
+    page.get_by_placeholder("Password").fill(password)
     page.get_by_role("button", name="Sign in").click()
-    print("Your first test with Playwright is successful")
+    expect(page.locator("mat-toolbar")).to_contain_text("Mi Mir")
+    print("\nYour first test with Playwright is successful")
 
     # ---------------------
     context.close()
@@ -19,4 +23,4 @@ def run(playwright: Playwright) -> None:
 
 
 with sync_playwright() as playwright:
-    run(playwright)
+    test_run(playwright)
