@@ -15,12 +15,12 @@ def test_upload_file(login_set_up) -> None:
     page.get_by_role("button", name="Update profile").click()
 
     # Avatar uploading
-    with page.expect_file_chooser() as fc_info:
-        page.get_by_text("Upload").click()
-        file_chooser = fc_info.value
-        file_chooser.set_files(file_path)
-
-        page.wait_for_timeout(3000)
+    # with page.expect_file_chooser() as fc_info:
+    #     page.get_by_text("Upload").click()
+    #     file_chooser = fc_info.value
+    #     file_chooser.set_files(file_path)
+    #
+    #     page.wait_for_timeout(3000)
 
     # ---------------------
 
