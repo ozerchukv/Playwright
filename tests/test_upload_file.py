@@ -7,22 +7,44 @@ def test_upload_file(login_set_up) -> None:
     # Test parameters
     page = login_set_up
     file_name = "avatar-generations_bssq.jpg"
-    file_path = os.path.join(os.path.expanduser("~"), "Desktop", file_name)
+    # Relative path in the repository
+    file_path = os.path.join(os.path.dirname(__file__), "files", file_name)
 
-    # Got to user profile
+    # Go to user profile
     page.get_by_label("Open user button").click()
     page.get_by_role("menuitem", name="Manage account").click()
     page.get_by_role("button", name="Update profile").click()
 
     # Avatar uploading
-    # with page.expect_file_chooser() as fc_info:
-    #     page.get_by_text("Upload").click()
-    #     file_chooser = fc_info.value
-    #     file_chooser.set_files(file_path)
-    #
-    #     page.wait_for_timeout(3000)
+    with page.expect_file_chooser() as fc_info:
+        page.get_by_text("Upload").click()
+        file_chooser = fc_info.value
+        file_chooser.set_files(file_path)
 
-    # ---------------------
+        page.wait_for_timeout(3000)
+
+
+# def test_upload_file_2(login_set_up) -> None:
+#     # Test parameters
+#     page = login_set_up
+#     file_name = "avatar-generations_bssq.jpg"
+#     # Relative path in the user's home directory
+#     file_path = os.path.join(os.path.expanduser("~"), "Desktop", file_name)
+#
+#     # Got to user profile
+#     page.get_by_label("Open user button").click()
+#     page.get_by_role("menuitem", name="Manage account").click()
+#     page.get_by_role("button", name="Update profile").click()
+#
+#     # Avatar uploading
+#     with page.expect_file_chooser() as fc_info:
+#         page.get_by_text("Upload").click()
+#         file_chooser = fc_info.value
+#         file_chooser.set_files(file_path)
+#
+#         page.wait_for_timeout(3000)
+
+# ---------------------
 
 # with sync_playwright() as playwright:
 #     test_upload_file(playwright)
